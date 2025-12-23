@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>포켓학습 회계사 - CPA 시험 준비 앱</title>
+    <meta name="description" content="공인회계사, 세무사 기출문제 풀이와 과학적 복습 시스템으로 효율적인 시험 준비">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-dark: #4338CA;
+            --bg: #ffffff;
+            --bg-secondary: #F9FAFB;
+            --text: #111827;
+            --text-secondary: #6B7280;
+            --border: #E5E7EB;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: var(--bg);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 140px 20px 80px;
+            background: linear-gradient(180deg, #F0F4FF 0%, #ffffff 100%);
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .hero-text h1 span {
+            color: var(--primary);
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .store-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .store-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 28px;
+            background: var(--text);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .store-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .store-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Phone Mockup */
+        .hero-mockup {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .phone-frame {
+            width: 260px;
+            height: 520px;
+            background: #1a1a1a;
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .phone-frame:nth-child(2) {
+            transform: translateY(40px);
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 30px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .phone-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        /* Features */
+        .features {
+            padding: 100px 20px;
+            background: var(--bg);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .section-title p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            padding: 32px;
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--primary);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 20px;
+            background: var(--text);
+            color: white;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand p {
+            color: #9CA3AF;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .footer-links h4 {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-links a {
+            display: block;
+            color: #9CA3AF;
+            text-decoration: none;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding-top: 30px;
+            border-top: 1px solid #374151;
+            text-align: center;
+            color: #9CA3AF;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .store-buttons {
+                justify-content: center;
+            }
+
+            .hero-mockup {
+                order: -1;
+            }
+
+            .phone-frame {
+                width: 200px;
+                height: 400px;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            nav {
+                display: none;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .hero-text p {
+                font-size: 1rem;
+            }
+
+            .phone-frame {
+                width: 160px;
+                height: 320px;
+                border-radius: 25px;
+            }
+
+            .phone-screen {
+                border-radius: 20px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h2 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a href="#" class="logo">
+                <img src="ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png" alt="포켓학습 회계사">
+                포켓학습 회계사
+            </a>
+            <nav>
+                <a href="#features">기능 소개</a>
+                <a href="privacy.html">개인정보보호</a>
+                <a href="terms.html">이용약관</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>
+                    CPA 시험 준비,<br>
+                    <span>포켓학습</span>으로<br>
+                    더 스마트하게
+                </h1>
+                <p>
+                    공인회계사, 세무사 기출문제 풀이와<br>
+                    과학적인 FSRS 복습 시스템으로<br>
+                    효율적인 시험 준비를 시작하세요.
+                </p>
+                <div class="store-buttons">
+                    <a href="#" class="store-btn">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                        </svg>
+                        App Store
+                    </a>
+                    <a href="#" class="store-btn">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                        </svg>
+                        Google Play
+                    </a>
+                </div>
+            </div>
+            <div class="hero-mockup">
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <img src="assets/images/screenshots/quiz-set.png" alt="문제 세트 화면">
+                    </div>
+                </div>
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <img src="assets/images/screenshots/quiz-page.png" alt="문제 풀이 화면">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>주요 기능</h2>
+                <p>효율적인 학습을 위한 다양한 기능을 제공합니다</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⭕</div>
+                    <h3>O/X 퀴즈</h3>
+                    <p>공인회계사, 세무사 기출문제를 O/X 형식으로 풀어보세요. 빠르고 효율적인 학습이 가능합니다.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>FSRS 복습</h3>
+                    <p>과학적인 간격 반복법(FSRS) 알고리즘으로 최적의 복습 시점을 자동으로 계산합니다.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">❌</div>
+                    <h3>오답 복습</h3>
+                    <p>틀린 문제만 모아서 집중적으로 복습하세요. 약점을 효과적으로 보완할 수 있습니다.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>북셀프</h3>
+                    <p>자주 풀고 싶은 문제 세트를 즐겨찾기에 추가하여 빠르게 접근하세요.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>학습 통계</h3>
+                    <p>GitHub 스타일 기여 그래프로 일일 학습 현황을 한눈에 확인할 수 있습니다.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>카카오 로그인</h3>
+                    <p>카카오 계정으로 간편하게 로그인하고 모든 기기에서 학습 기록을 동기화하세요.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>포켓학습 회계사</h3>
+                <p>
+                    공인회계사, 세무사 시험 준비를 위한<br>
+                    스마트 학습 앱입니다.<br><br>
+                    <strong>개인정보 보호책임자</strong><br>
+                    성명: 정세민<br>
+                    이메일: admin@ttalkkakcpa.org<br>
+                    연락처: 010-6887-0153
+                </p>
+            </div>
+            <div class="footer-links">
+                <h4>다운로드</h4>
+                <a href="#">App Store</a>
+                <a href="#">Google Play</a>
+            </div>
+            <div class="footer-links">
+                <h4>약관</h4>
+                <a href="privacy.html">개인정보보호약관</a>
+                <a href="terms.html">이용약관</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 포켓학습 회계사. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>
